@@ -148,9 +148,27 @@ footer{
   bottom: 0;
   font-size: 12px;
   text-align: center;
+  margin-top: 100px;
 }
 
 /* study_diary */
 .study_section1{
-  height: 100vh;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 150px;
+}
+
+blockquote{
+  border: #aaa 1px solid;
+  padding: 10px;
+}
+pre{
+  border: 1px solid #ddd; 
+  padding: 5px;
+}
+
+.article_img{
+  width: 100%;
+  margin: 10px 5px;
+  padding: 5px;
 }

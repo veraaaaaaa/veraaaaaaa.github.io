@@ -24,7 +24,98 @@
         </div>
     </header>
     <section class="study_section1">
+    
 
+<h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="postCss__0"></a>postCss 的使用筆記 ( 2019 / 10 / 09 )</h1>
+<p class="has-line-data" data-line-start="2" data-line-end="3">為何會需要postCss?</p>
+<img src="./assets/images/study_diary/20191009/postCss_1.png" alt="" class="article_img">
+<blockquote>
+<p class="has-line-data" data-line-start="4" data-line-end="6">css 的預處理器我一直都使用 sass，後來因為 webpack 的緣故才認識了postCss ，但sass 已經很好用，我會需要 postCss 嗎？<br>
+這裡我的理解是，</p>
+</blockquote>
+<h3 class="code-line" data-line-start=9 data-line-end=10 ><a id="_webpack__9"></a>在 webpack 裡面的使用</h3>
+<pre><code class="has-line-data" data-line-start="12" data-line-end="14" class="language-sh">$ npm install postcss-loader --save-dev
+</code></pre>
+<p class="has-line-data" data-line-start="14" data-line-end="15">webpack.config.js</p>
+<pre><code class="has-line-data" data-line-start="16" data-line-end="37" class="language-sh">rules: [
+    {
+        <span class="hljs-built_in">test</span>: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+            {
+                loader: <span class="hljs-string">'style-loader'</span>,
+            },
+            {
+                loader: <span class="hljs-string">'css-loader'</span>,
+                options: {
+                    importLoaders: <span class="hljs-number">1</span>,
+                }
+            },
+            {
+                loader: <span class="hljs-string">'postcss-loader'</span>
+            }
+        ]
+    }
+]
+</code></pre><br>
+<p class="has-line-data" data-line-start="37" data-line-end="40">postcss.config.js<br><br>
+* 所有使用到的插件都需在這裡配置，空配置頂時配置 xx : {}<br>
+ps：也可以在 webpack 中配置</p>
+<pre><code class="has-line-data" data-line-start="41" data-line-end="49" class="language-sh">module.exports = {
+  plugins: {
+    <span class="hljs-string">'autoprefixer'</span>: {
+        browsers: <span class="hljs-string">'&gt; 5%'</span> //可以都不填，用默認配置
+    }
+  }
+}
+</code></pre><br>
+<h3 class="code-line" data-line-start=51 data-line-end=52 ><a id="_postcss__51"></a>常用的 postcss 插件</h3>
+<p class="has-line-data" data-line-start="53" data-line-end="54">autoprefixer</p>
+<pre><code class="has-line-data" data-line-start="55" data-line-end="58" class="language-sh">根據 Can I Use，自動補齊前綴字
+安裝：npm install autoprefixer --save-dev
+</code></pre><br>
+<p class="has-line-data" data-line-start="59" data-line-end="60">postcss-cssnext</p>
+<blockquote>
+<p class="has-line-data" data-line-start="61" data-line-end="64">别忘了在 postcss.config.js 配置：‘postcss-cssnext’: {}<br>
+cssnext 包含了 autoprefixer ，都安裝會報錯，如下：<br>
+Warning: postcss-cssnext found a duplicate plugin (‘autoprefixer’) in your postcss plugins. This might be inefficient. You should remove ‘autoprefixer’ from your postcss plugin list since it’s already included by postcss-cssnext.</p>
+</blockquote>
+<pre><code class="has-line-data" data-line-start="66" data-line-end="85" class="language-sh">相當於一個變量，變量的好處顯而易見，可重複使用
+
+<span class="hljs-number">1</span> . 定義
+在 :root 選擇器定義一個 css 屬性
+:root{
+    --mianColor:<span class="hljs-comment">#ffc001;</span>
+}
+
+<span class="hljs-number">2</span> . 使用
+使用 var(xx) 調用自定義屬性
+.test{
+    background: var(--mianColor);
+}
+
+/*編譯後*/
+.test{
+    background: <span class="hljs-comment">#ffc001;</span>
+}
+</code></pre>
+<pre><code class="has-line-data" data-line-start="86" data-line-end="89" class="language-sh">使用下個版本的 css 語法，語法見 cssnext (css4) 語法
+安装：npm install postcss-cssnext --save-dev
+</code></pre><br>
+<p class="has-line-data" data-line-start="90" data-line-end="91">postcss-pxtorem</p>
+<pre><code class="has-line-data" data-line-start="93" data-line-end="96" class="language-sh">把 px 轉換 rem
+安裝：npm install postcss-pxtorem --save-dev
+</code></pre>
+<pre><code class="has-line-data" data-line-start="97" data-line-end="107" class="language-sh">{
+    rootValue: <span class="hljs-number">16</span>, //你在html節點設的font-size大小
+    unitPrecision: <span class="hljs-number">5</span>, //轉rem精確到小數點多少位
+    propList: [<span class="hljs-string">'font'</span>, <span class="hljs-string">'font-size'</span>, <span class="hljs-string">'line-height'</span>, <span class="hljs-string">'letter-spacing'</span>],//指定轉換成 rem 的屬性
+    selectorBlackList: [],// str/reg 指定不轉換的選擇器，str時包含字段即符合
+    replace: <span class="hljs-literal">true</span>,
+    mediaQuery: <span class="hljs-literal">false</span>, //mediaQuery查詢内的 px 是否轉換
+    minPixelValue: <span class="hljs-number">0</span> //小於指定數值的 px 不轉換
+}
+</code></pre>
     </section>
 
     <footer>
