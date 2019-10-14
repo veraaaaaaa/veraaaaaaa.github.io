@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>20191014_2</title>
+    <link rel="shortcut icon" href="./assets/images/icon2.png" type="image/x-icon" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/notosanstc.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/solarized-dark.min.css">
@@ -26,7 +27,7 @@
         </div>
     </header>
     <section class="study_section1">
-        <h1>RESTful API ( 2019 / 10 / 14 )</h1>
+        <h1>RESTful API + Postman ( 2019 / 10 / 14 )</h1>
         <p>常常聽到的 RESTful API，對他一知半解，這一篇學習筆記將記錄下我從頭學 RESTful API 的重點。</p>
         <!-- <img src="./assets/images/study_diary/20191014/highlight.png" alt=""> -->
         <pre><code>API（Application Programming Interface），
@@ -51,7 +52,7 @@ RESTful 是基於 http 方法的 API 設計風格，而不是一種新的技術�
         <br><br>
         <hr>
         <h3>和 SOAP 比較</h3>
-        <img src="./assets/images/study_diary/20191014/http_3.png" alt="">
+        <img src="./assets/images/study_diary/20191014/http_2.png" alt="">
         <br><br>
         <hr>
         <h3>RESTful API 設計</h3>
@@ -70,7 +71,10 @@ RESTful 是基於 http 方法的 API 設計風格，而不是一種新的技術�
         </blockquote>
         <h4>過濾訊息</h4>
         <p>如果資料量過多，api應提供參數，過濾返回結果</p>
-        <img src="./assets/images/study_diary/20191014/http_2.png" alt="">
+        <pre><code>？offset = 10 : 指定返回紀錄的開始位置
+？page=2&per_page = 100 : 指定第幾頁，以及每一頁的紀錄數
+？animal_type_id = 1 : 指定篩選條件
+？sortby = name&order = asc : 指定返回結果排序，以及排列順序</code></pre>
         <h4>狀態碼</h4>
         <pre><code class="html">
 <p>    成功 - 2xx
@@ -121,9 +125,8 @@ RESTful 是基於 http 方法的 API 設計風格，而不是一種新的技術�
     "error" :  "參數錯誤"
 }</code></pre>
         <h4>返回結果</h4>
-        <pre><code>HATEOAS : Hypermedia as the Engine of Application State 超媒體作為應用狀態的引擎。
-
-RESTful API 最好做到 HATEOAS，即返回結果中提供鏈接，連向其他 API 方法，使得用戶不查文檔，也知道下一步應該做什么。比如，當用戶向a pi.example.com 的根目錄發出請求，會得到這樣一個文檔。
+        <pre><code>//HATEOAS : Hypermedia as the Engine of Application State 超媒體作為應用狀態的引擎。
+//RESTful API 最好做到 HATEOAS，即返回結果中提供鏈接，連向其他 API 方法，使得用戶不查文檔，也知道下一步應該做什么。比如，當用戶向 api.example.com 的根目錄發出請求，會得到這樣一個文檔。
 
 { "link" : 
     {
@@ -135,7 +138,7 @@ RESTful API 最好做到 HATEOAS，即返回結果中提供鏈接，連向其他
 }
 </code></pre>
         <br>
-        <hr>
+        <hr><br>
         <h3>需要注意的事情：</h3>
         <pre><code>具有合理的資源名稱 (只是 URL 路徑 (如 customers/12345/orders) 可以提高給定請求的清晰度。
 
@@ -177,11 +180,45 @@ userResource.get()
 每個 resource 擁有自己的識別名詞，而 Clients 從單一 resource 開始瀏覽，透過標準操作走訪 resource，
 如 GET 下載，PUT更新，DELETE刪除，POST新增，注意到每個物件有自己的URL，而且可以容易被快取，複製跟書籤化(bookmarked)。
 </code></pre>
-<br><hr>
+<br><hr><br>
+
+<h3>接口測試 - Postman</h3>
+<img src="./assets/images/study_diary/20191014/postman.png" alt="">
+<p></p>
+<br><hr><br>
         <h3>學習資源</h3>
         <h5 style="font-weight: 200">
-            http://www.runoob.com/nodejs/nodejs-restful-api.html<br>https://spicyboyd.blogspot.com/2018/10/web-service-rest.html<br>
+            http://www.runoob.com/nodejs/nodejs-restful-api.html<br>
+            https://spicyboyd.blogspot.com/2018/10/web-service-rest.html<br>
+            https://segmentfault.com/a/1190000015144126<br>
+            https://ithelp.ithome.com.tw/articles/10201503<br>
+            https://www.lbbniu.com/7650.html<br>
+            https://ithelp.ithome.com.tw/articles/10197123
         </h5>
+
+<br>
+<div id="disqus_thread"></div>
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://veraaaaaaa.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
     </section>
 
     <footer>
@@ -190,6 +227,7 @@ userResource.get()
             Copyright © 2019 VERA. All rights reserved. 版權所有，禁止擅自轉貼節錄
         </p>
     </footer>
+    <script id="dsq-count-scr" src="//veraaaaaaa.disqus.com/count.js" async></script>
 </body>
 <script>hljs.initHighlightingOnLoad();</script>
 

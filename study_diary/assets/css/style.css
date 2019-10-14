@@ -81,10 +81,6 @@ header:after{
   margin: 10%;
 }
 
-.icon_group a{
-  /* background-color: #333 */
-}
-
 @media screen and (min-width: 768px) {
   .icon_group {
     width: initial;
