@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>20191009</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/notosanstc.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/solarized-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="https://veraaaaaaa.github.io/study_diary/" target="_blank">
+            <img src="./assets/images/logo_vera.png" alt="" class="logo">
+        </a>
+        <div class="icon_group">
+            <a href="https://github.com/veraaaaaaa/" target="_blank"><img src="./assets/images/git.png" alt=""></a>
+            <a href="https://medium.com/@veraaaaaliu" target="_blank"><img src="./assets/images/medium.png" alt=""></a>
+            <a href=""><img src="./assets/images/ig.png" alt="" target="_blank"></a>
+            <a href=""><img src="./assets/images/twitter.jpg" alt="" target="_blank"></a>
+            <a href=""><img src="./assets/images/linkedin.png" alt="" target="_blank"></a>
+        </div>
+    </header>
+    <section class="study_section1">
+        <h1>如何在 html 呈現程式碼樣式？</h1>
+        <p>希望能在頁面上直接呈現 coding 的樣式，上網做了一下功課發現<a href="https://highlightjs.org/" target="_blank">
+                Highlight.js </a> 這套工具，它所呈現的效果就像平常我們在 coding 一樣。</p>
+        <img src="./assets/images/study_diary/20191014/hightlight.png" alt="">
+        <br><br>
+        <hr>
+        <h4>step1 -> 引入 cdn </h4>
+        <p>ps : 他的樣式選擇有 defalut, zenburn, agate, androidstudio, dracula, rainbow, atom-one-dark, solarized-dark, github
+            ...</p>
+        <pre><code class="html">&lt;link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/{{ 樣式選擇 }}.min.css" rel="stylesheet"&gt;  
+&lt;script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"&gt;&lt;/script&gt;</code></pre>
+
+        <h4>step2 ->&nbsp js 中寫入 </h4>
+        <pre><code class="html">&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt; </code></pre>
+
+        <h4>step3 -> 在裡面輸入你要的程式碼</h4>
+        <pre><code>&lt;pre&gt;&lt;code&gt; ``` 程式碼 ``` &lt;/code&gt;&lt;/pre&gt;</code></pre>
+
+        <h4>step4 -> 如果是 javascript 就在 code 給他一個 javascript 的 class </h4>
+
+        <pre><code>&lt;pre&gt;&lt;code class="javascript"&gt; ``` 程式碼 ``` &lt;/code&gt;&lt;/pre&gt;</code></pre>
+
+        <h4>example :</h4>
+        <pre><code class="javascript"> 
+test = { 
+    name : function () { 
+        return 'hello'; 
+    }, 
+    age : function () { 
+        return 13; 
+    } 
+} 
+        </code></pre>
+
+        <h4>需要注意的地方：</h4>
+        <p>顯示不出來的可以用已定義好的特殊符號取代試試看</p>
+        <img src="./assets/images/study_diary/20191014/highlight_1.png" alt="" style="width:40%; min-width:200px; max-width:300px;">
+        <br><br>
+        <hr>
+        <br>
+        <h3>原理：</h3>
+        <img src="./assets/images/study_diary/20191014/highlight_2.png" alt="">
+        <!-- <blockquote>
+            原理：<br>
+            从官方用法可知，在使用前要引入CSS,highlight.js文件然后通过hljs.initHighlightingOnLoad()方法进行渲染；下面介绍两个重要的方法，initHighlightingOnLoad()和initHighlighting()
+            initHighlighting():主要是获取页面中的pre,code标签，按照特定的规则为其添加样式，只执行一次。
+
+            //hightlight.js源码
+            function initHighlighting() {
+            if (initHighlighting.called) return; //如果被执行过，则返回，说明只执行一次
+            initHighlighting.called = true;//标记执行过
+            var blocks = document.querySelectorAll('pre code');//获取页面所有 pre ,code 标签
+            ArrayProto.forEach.call(blocks, highlightBlock);}//通过highlight.js的规则添加样式
+            initHighlightingOnLoad():监听页面加载事件，调用initHighlighting()
+
+            //hightlight.js源码
+            function initHighlightingOnLoad() {
+            addEventListener('DOMContentLoaded', initHighlighting, false);
+            addEventListener('load', initHighlighting, false);
+            }
+        </blockquote> -->
+        <br><br>
+        <hr><br>
+        <h3>vue + highligh.js</h3>
+        <img src="./assets/images/study_diary/20191014/highlight_3.png" alt="">
+
+        <!-- <p>问题使用：这样使用会在页面渲染的时候会出现高亮效果，但是这导致的问题是，切换路由的时候代码高亮会消失。之所以产生这种现象，这跟 hljs.initHighlightingOnLoad()的定义有关，因为只执行一次。
+        </p>
+
+        import hljs from 'highlight.js'
+        export default {
+        mounted(){
+        hljs.initHighlightingOnLoad()
+        }
+        }
+        解决方法：可以重写 hljs.initHighlighting()方法，在组件的中是使用 hljs.highlightCode()，每次页面加载的时候都会执行渲染代码的逻辑。
+
+        //在main.js中
+        import 'highlight.js/styles/googlecode.css'
+        import hljs from 'highlight.js'
+        hljs.highlightCode = function () { //自定义highlightCode方法，将只执行一次的逻辑去掉
+        let blocks = document.querySelectorAll('pre
+        code');
+        [].forEach.call(blocks, hljs.highlightBlock);
+        };
+        //在组件中
+        export default {
+        mounted(){
+        hljs.highlightCode()
+        }
+        } -->
+        <br><br>
+        <hr>
+        <h3>學習資源</h3>
+        <h5 style="font-weight: 200">https://segmentfault.com/a/119000001070873<br>https://github.com/DuncanmaMSFT/highlight.js/</h5>
+    </section>
+
+    <footer>
+        <p>
+            建議使用 Chrome、Firefox、Safari 瀏覽 <br>
+            Copyright © 2019 VERA. All rights reserved. 版權所有，禁止擅自轉貼節錄
+        </p>
+    </footer>
+</body>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</html>
