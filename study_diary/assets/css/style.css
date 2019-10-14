@@ -11,6 +11,18 @@ img{
   width: 100%;
 }
 
+.index a h2{
+  color: #444;
+}
+
+.index a{
+  color: #666;
+}
+
+.index a:visited{
+  color: #777;
+}
+
 a{
   text-decoration: none;
   font-weight: 900;
@@ -138,8 +150,11 @@ section{
 }
 
 .section2_inner img{
-  width: 55%;
+  /* width: 55%; */
   margin: auto;
+  min-height: 150px;
+  max-height: 150px;
+  height: 100%;
 }
 
 .section2_inner_up{
