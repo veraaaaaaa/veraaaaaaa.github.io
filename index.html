@@ -1,1 +1,123 @@
-<h1>vera</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .highlight {
+        margin: 0px;
+        display: block;
+        overflow-x: auto;
+        padding: 15px 20px;
+        font-size: 14px;
+        font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+        line-height: 22.400000000000002px;
+    }
+
+    .highlight table {
+        margin: 0;
+        width: auto;
+    }
+
+    .highlight table td {
+        border: none;
+    }
+
+    .highlight table td.code {
+        padding-right: 20px;
+    }
+
+    .highlight .gutter pre {
+        color: #666;
+        text-align: right;
+        padding-right: 20px;
+    }
+
+    .article-entry .highlight {
+        margin: 1.6em 0;
+    }
+
+    .article-entry .highlight .line {
+        height: 1.6em;
+    }
+
+    .highlight {
+        color: #a9b7c6;
+        background: #282b2e;
+    }
+
+    .highlight .code .number,
+    .highlight .code .literal,
+    .highlight .code .symbol,
+    .highlight .code .bullet {
+        color: #6897bb;
+    }
+
+    .highlight .code .keyword,
+    .highlight .code .selector-tag,
+    .highlight .code .deletion {
+        color: #cc7832;
+    }
+
+    .highlight .code .variable,
+    .highlight .code .template-variable,
+    .highlight .code .link {
+        color: #629755;
+    }
+
+    .highlight .code .comment,
+    .highlight .code .quote {
+        color: #808080;
+    }
+
+    .highlight .code .meta {
+        color: #bbb529;
+    }
+
+    .highlight .code .string,
+    .highlight .code .attribute,
+    .highlight .code .addition {
+        color: #6a8759;
+    }
+
+    .highlight .code .section,
+    .highlight .code .title,
+    .highlight .code .type {
+        color: #ffc66d;
+    }
+
+    .highlight .code .name,
+    .highlight .code .selector-id,
+    .highlight .code .selector-class {
+        color: #e8bf6a;
+    }
+
+    .highlight .code .emphasis {
+        font-style: italic;
+    }
+
+    .highlight .code .strong {
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <figure class="highlight javascript">
+        <table>
+            <tr>
+                <td class="gutter">
+                    <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
+                </td>
+                <td class="code">
+                    <pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</span><br><span class="line">  <span class="comment">// PostCSS</span></span><br><span class="line">  postcss = <span class="built_in">require</span>(<span class="string">'gulp-postcss'</span>),</span><br><span class="line">  autoprefixer = <span class="built_in">require</span>(<span class="string">'autoprefixer'</span>); <span class="comment">// postCSS 的套件原則上都是要一個一個載入</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> paths = &#123;</span><br><span class="line">  <span class="string">'source'</span>: <span class="string">'./source/'</span>,</span><br><span class="line">  <span class="string">'bower'</span> : <span class="string">'./bower_components/'</span>,</span><br><span class="line">  <span class="string">'sass'</span>: <span class="string">'./source/stylesheets/'</span>,</span><br><span class="line">  <span class="string">'img'</span>: <span class="string">'./source/images/'</span>,</span><br><span class="line">  <span class="string">'public'</span>: <span class="string">'./public/'</span>,</span><br><span class="line">  <span class="string">'tpls'</span>: <span class="string">'./gulp-tpls/'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// postCSS</span></span><br><span class="line">gulp.task(<span class="string">'css'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 在 processors 內定義需要用哪些套件，這邊只有使用 autoprefixer</span></span><br><span class="line">  <span class="keyword">var</span> processors = [</span><br><span class="line">    autoprefixer(&#123;<span class="attr">browsers</span>: [<span class="string">'last 1 version'</span>]&#125;)</span><br><span class="line">  ];</span><br><span class="line">  watch(paths.public + <span class="string">'stylesheets/**/**.css'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    gulp.src(paths.public + <span class="string">'stylesheets/**/**.css'</span>)</span><br><span class="line">      .pipe(plumber())</span><br><span class="line">      .pipe(concat(<span class="string">'all.css'</span>))</span><br><span class="line">      .pipe(postcss(processors))</span><br><span class="line">      .pipe(gulp.dest(paths.public + <span class="string">'./css'</span>));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'css'</span>]);</span><br></pre>
+                </td>
+            </tr>
+        </table>
+    </figure>
+</body>
+
+</html>

@@ -5,6 +5,7 @@ body {
   position: relative;
   font-family: "Helvetica",Arial, "Noto Sans TC","LiHei Pro  Medium", "Microsoft JhengHei", "PMingLiU", sans-serif;
   margin: 0;
+  overflow-x: hidden; 
 }
 
 section{

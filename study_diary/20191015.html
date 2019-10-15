@@ -12,6 +12,40 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/solarized-dark.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 </head>
+<style>
+    body {
+        text-align: center;
+    }
+
+    iframe {
+        /* width: 500px; */
+        height: 500px;
+        margin: auto;
+        border: 5px solid #ebb08b;
+        margin: 10px;
+    }
+
+    input {
+        display: flex;
+        margin: 20px auto;
+    }
+
+    #submit {
+        padding: 13px 20px 13px 20px;
+        background-color: #7942e6;
+        border-radius: 35px;
+        font-size: 18px;
+        color: #fff;
+    }
+
+    #search {
+        font-size: 40px;
+        padding: 10px;
+        width: 300px;
+        color: #aaa;
+        border: 5px solid #7942e6;
+    }
+</style>
 
 <body>
     <header>
@@ -27,13 +61,39 @@
         </div>
     </header>
     <section class="study_section1">
-        <h1>何謂 gitflow ? ( 2019 / 10 / 15 )</h1>
-        
-<br><hr>
-        <h3>學習資源</h3>
-        <h5 style="font-weight: 200">
-            http://www.runoob.com/nodejs/nodejs-restful-api.html<br>https://spicyboyd.blogspot.com/2018/10/web-service-rest.html<br>
-        </h5>
+        <h1>KKBOX API 的練習 ( 2019 / 10 / 15 )</h1>
+        <hr>
+        <br>
+        <h3>想聽什麼歌？</h3>
+        <input type="text" id="search" size="20">
+        <input type="button" onclick="formSubmit()" value="就決定是你了" id="submit">
+        <br><br>
+        <iframe src="" frameborder="0" id="iframe" allow="autoplay"></iframe>
+        <br><br><br>
+        <hr>
+        <br><br>
+        <div id="disqus_thread"></div>
+        <script>
+
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://veraaaaaaa.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+
     </section>
 
     <footer>
@@ -44,5 +104,35 @@
     </footer>
 </body>
 <script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+
+    function formSubmit() {
+        var name = document.querySelector('#search').value;
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                // document.getElementById("div").innerHTML = xmlhttp.responseText;
+                var response = xmlhttp.responseText;
+                obj = JSON.parse(response);
+                var singer = "https://widget.kkbox.com/v1/?id=" + obj.albums.data[0].id + "&lan=TC,SC,JA,EN,MS&type=album&autoplay=true&loop=true"
+                document.getElementById("iframe").setAttribute('src', singer)
+
+                console.log(obj)
+            }
+        }
+        xmlhttp.open("GET", "https://api.kkbox.com/v1.1/search?q=" + name + "&territory=TW&limit=1", true);
+        xmlhttp.setRequestHeader("Authorization", ' Bearer MgFR8ACcu6Yo9rpLv0TZAQ==');
+        xmlhttp.setRequestHeader("Content-Type", 'application/x-www-form-urlencoded');
+        xmlhttp.setRequestHeader("accept", 'application/json');
+        xmlhttp.send();
+    }
+</script>
 
 </html>
