@@ -13,9 +13,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 </head>
 <style>
-    body {
+    .kkbox_api {
         text-align: center;
     }
+
     iframe {
         /* width: 500px; */
         height: 500px;
@@ -23,10 +24,12 @@
         border: 5px solid #ebb08b;
         margin: 10px;
     }
+
     input {
         display: flex;
         margin: 20px auto;
     }
+
     #submit {
         padding: 13px 20px 13px 20px;
         background-color: #7942e6;
@@ -34,6 +37,7 @@
         font-size: 18px;
         color: #fff;
     }
+
     #search {
         font-size: 40px;
         padding: 10px;
@@ -42,6 +46,7 @@
         border: 5px solid #7942e6;
     }
 </style>
+
 <body>
     <header>
         <a href="https://veraaaaaaa.github.io/study_diary/" target="_blank">
@@ -56,16 +61,38 @@
         </div>
     </header>
     <section class="study_section1">
-        <h1>KKBox API 的練習 ( 2019 / 10 / 15 )</h1><br>
+        <h1>KKbox API 的練習 ( 2019 / 10 / 15 )</h1><br>
         <img src="./assets/images/study_diary/20191015/widget_type.png" alt="">
-        <p>這次試串 KKBox 的 api，用 js 取資料，再放置到 kkBox 提供的 HTML Widgets 裡面，由於 HTML Widgets 提供的 api 只有三種樣式，有 playlist, album, song，需對應相符合的 id，所以我選擇取專輯的 id。</p><br>
+        <p>這次試串 KKbox 的 api，用 js 取資料，比較需要注意的是取回來的資料需要多一步驟 obj = JSON.parse(response);（ 從服務端接收的是數组的 JSON 數據， JSON.parse
+            會將其轉換為物件格式 ），取回來的資料需要再放置到 KKbox 提供的 HTML Widgets 裡面，由於 HTML Widgets 提供的 api 只有三種樣式，有 playlist,
+            album, song，應需對應相符合的 id。這次練習時我選擇取專輯的 id，並使用 album 的 widget。</p><br>
+        <hr><br><br>
+        <h3>從KKbox專案開始</h3>
+        <a href="https://developer.kkbox.com/" target="">https://developer.kkbox.com/</a><br><br>
+        <img src="./assets/images/study_diary/20191015/kkbox_app.png" alt="">
+        <br><br>
+        <p>創建完點進去會獲取一組 id 和 secret </p>
+        <img src="./assets/images/study_diary/20191015/kkbox_id.png" alt="">
+        <br><br>
+        <p>打開終端機，將 id 替換成自己的</p>
+        <pre><code><br>vera-pro:OpenAPI-JavaScript veraliu$
+url -d "grant_type=client_credentials&&client_id={{ id }}" https://account.kkbox.com/oauth2/token<br><br></code></pre>
+        <p>將會收到一組 access_token</p>
+        <pre><code><br>{"access_token":"{{ access_token }}","token_type":"Bearer","expires_in":2592000}<br><br></code></pre>
+        <p>接著可以開始測試，輸入以下指令，如果一切順利你將可以得到 json 格式的返回值</p>
+        <pre><code><br>curl --header "Authorization: Bearer {{ access_token }}" "https://api.kkbox.com/v1.1/search?q=怎麼了&type=track&territory=TW"<br><br></code></pre>
+        <p>接著就能開始玩了！</p><br>
         <hr>
         <br>
-        <h3>想聽哪張專輯的歌？</h3>
-        <input type="text" id="search" size="20" onkeypress="formSubmit()">
-        <input type="button" onclick="formSubmit()" value="就決定是你了" id="submit">
-        <br><br>
-        <iframe src="" frameborder="0" id="iframe" allow="autoplay"></iframe>
+        <h3>成品如下：</h3>
+        <br>
+        <div class="kkbox_api">
+            <h3>想聽哪張專輯的歌？</h3>
+            <input type="text" id="search" size="20" onkeypress="formSubmit()">
+            <input type="button" onclick="formSubmit()" value="就決定是你了" id="submit">
+            <br><br>
+            <iframe src="" frameborder="0" id="iframe" allow="autoplay"></iframe>
+        </div>
         <br><br><br>
         <hr>
         <br><br>
