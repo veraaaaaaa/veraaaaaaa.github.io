@@ -16,7 +16,6 @@
     body {
         text-align: center;
     }
-
     iframe {
         /* width: 500px; */
         height: 500px;
@@ -24,12 +23,10 @@
         border: 5px solid #ebb08b;
         margin: 10px;
     }
-
     input {
         display: flex;
         margin: 20px auto;
     }
-
     #submit {
         padding: 13px 20px 13px 20px;
         background-color: #7942e6;
@@ -37,7 +34,6 @@
         font-size: 18px;
         color: #fff;
     }
-
     #search {
         font-size: 40px;
         padding: 10px;
@@ -46,7 +42,6 @@
         border: 5px solid #7942e6;
     }
 </style>
-
 <body>
     <header>
         <a href="https://veraaaaaaa.github.io/study_diary/" target="_blank">
@@ -61,11 +56,13 @@
         </div>
     </header>
     <section class="study_section1">
-        <h1>KKBOX API 的練習 ( 2019 / 10 / 15 )</h1>
+        <h1>KKBox API 的練習 ( 2019 / 10 / 15 )</h1><br>
+        <img src="./assets/images/study_diary/20191015/widget_type.png" alt="">
+        <p>這次試串 KKBox 的 api，用 js 取資料，再放置到 kkBox 提供的 HTML Widgets 裡面，由於 HTML Widgets 提供的 api 只有三種樣式，有 playlist, album, song，需對應相符合的 id，所以我選擇取專輯的 id。</p><br>
         <hr>
         <br>
-        <h3>想聽什麼歌？</h3>
-        <input type="text" id="search" size="20">
+        <h3>想聽哪張專輯的歌？</h3>
+        <input type="text" id="search" size="20" onkeypress="formSubmit()">
         <input type="button" onclick="formSubmit()" value="就決定是你了" id="submit">
         <br><br>
         <iframe src="" frameborder="0" id="iframe" allow="autoplay"></iframe>
@@ -74,7 +71,6 @@
         <br><br>
         <div id="disqus_thread"></div>
         <script>
-
             /**
             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
@@ -93,9 +89,7 @@
         </script>
         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
                 Disqus.</a></noscript>
-
     </section>
-
     <footer>
         <p>
             建議使用 Chrome、Firefox、Safari 瀏覽 <br>
@@ -104,16 +98,14 @@
     </footer>
 </body>
 <script>hljs.initHighlightingOnLoad();</script>
-
 <script>
-
     function formSubmit() {
         var name = document.querySelector('#search').value;
         var xmlhttp;
-        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
         }
-        else {// code for IE6, IE5
+        else { // code for IE6, IE5
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function () {
@@ -123,7 +115,6 @@
                 obj = JSON.parse(response);
                 var singer = "https://widget.kkbox.com/v1/?id=" + obj.albums.data[0].id + "&lan=TC,SC,JA,EN,MS&type=album&autoplay=true&loop=true"
                 document.getElementById("iframe").setAttribute('src', singer)
-
                 console.log(obj)
             }
         }
