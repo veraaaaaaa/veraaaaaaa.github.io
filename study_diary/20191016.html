@@ -29,6 +29,7 @@
     </header>
     <section class="study_section1">
         <h1>在 vue 專案裡面使用 sass + webpack ( 2019 / 10 / 16 )</h1>
+        <br>
         <p>延用我建立的 vue + webpack + stylus 專案，把載入的 stylus 改成載入 sass 的東西</p>
         <pre><code>npm install node-sass --save-dev
 npm install sass-loader --save-dev</code></pre>
@@ -44,12 +45,16 @@ npm install sass-loader --save-dev</code></pre>
     test: /\.scss$/,
     loaders: ['style', 'css', 'sass']
 }</code></pre><br>
+        <p>在 vue2.x 裡面用</p>
+        <pre><code> &lt;style lang="scss" scoped="" type="text/css"></style></code></pre><br>
+        <p>新增 style.sass 的話需要在 index.js 裡面 import 位置</p>
+        <pre><code> import './assets/styles/style.scss'</style></code></pre><br>
         <p>我朋友踩到的坑是 sass-loader 的版本太高</p>
         <pre><code>1.將package.json中的sass-loader的配置修改成低於8.0.0版本，修改成7.3.1
 2.將安裝的node_modules項目依賴刪除，重新安装，將sass-loader版本變成7.3.1
-3.重新運行項目 npm run dev</code></pre><br>
+3.重新運行項目 npm run dev</code></pre><br><br>
         <hr>
-        <br><br>
+        <br><br><br>
         <div id="disqus_thread"></div>
         <script>
             /**
