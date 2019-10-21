@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>20191021</title>
+    <link rel="shortcut icon" href="./assets/images/icon2.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/notosanstc.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/solarized-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="https://veraaaaaaa.github.io/study_diary/" target="_blank">
+            <img src="./assets/images/logo_vera.png" alt="" class="logo">
+        </a>
+        <div class="icon_group">
+            <a href="https://github.com/veraaaaaaa/" target="_blank"><img src="./assets/images/git.png" alt=""></a>
+            <a href="https://medium.com/@veraaaaaliu" target="_blank"><img src="./assets/images/medium.png" alt=""></a>
+            <a href=""><img src="./assets/images/ig.png" alt="" target="_blank"></a>
+            <a href=""><img src="./assets/images/twitter.jpg" alt="" target="_blank"></a>
+            <a href=""><img src="./assets/images/linkedin.png" alt="" target="_blank"></a>
+        </div>
+    </header>
+    <section class="study_section1">
+        <h1>JavaScript Closure ( 2019 / 10 / 21 )</h1>
+        <br>
+        <img src="./assets/images/study_diary/20191021/js.png" alt="">
+        <br> <br>
+        <p>Closure (中文稱做閉包) 是一個屬於函數特殊的執行環境 (scope; context)，這「封閉」的環境中保存 (record) 了讓函數可以持續 (甚至在 function 被 return 後)
+            存取的獨立自由變數 (free variable)，換句話說，closure 是讓函數能「記得」被建立時的環境的一種機制。
+
+        </p>
+        <br>
+        <pre><code>function makeFunc() {
+    // 一個局部變數
+    var name = 'Fooish';
+
+function displayName() {
+    // 內部函數可以存取外部函數的變數
+    alert(name);
+}
+
+    // 返回一個內部函數，並創建一個 closure  
+    return displayName;
+}
+
+var myFunc = makeFunc();
+
+// 顯示 Fooish
+myFunc();
+        </code></pre><br><br>
+        <hr>
+        <br><br><br>
+        <h2>console.dir()</h2>
+        <p>差個題外話，今天學到一個新東西 console.dir() ～～<br>
+            console.log() 可以取代 alert() 或 document.write()，會在瀏覽器檢查模式印出訊息。
+            <br>
+            console.dir() 可以顯示一個對象所有的屬性和方法。
+        </p>
+        <img src="./assets/images/study_diary/20191021/console.png" alt="">
+        <br><br>
+        <hr>
+        <br><br><br>
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://veraaaaaaa.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </section>
+
+    <footer>
+        <p>
+            建議使用 Chrome、Firefox、Safari 瀏覽 <br>
+            Copyright © 2019 VERA. All rights reserved. 版權所有，禁止擅自轉貼節錄
+        </p>
+    </footer>
+</body>
+<script>hljs.initHighlightingOnLoad();
+
+
+    // outer func
+    var addTo = function (passed) {
+        // inner func
+        var add = function (inner) { return passed + inner }
+        return add
+    }
+    console.dir(addTo(3))
+
+    // 實際應用 (我們可以保存變數於函式內)
+    var addThree = addTo(3)
+    var addFive = addTo(5)
+
+    // 查看 [[Scopes]] Closure 可見 passed 保存了不同的值
+    console.dir(addFive)
+
+    console.log(addThree(3)) // 6
+    console.log(addFive(3)) // 8
+
+        // 上面的 addFive(3) 等同於
+        // IIFE 執行 內部 add Func 並回傳其值
+        // (因addTo回傳function，而addTo()會執行該Func)
+        (function add(inner) {
+            return 5 + inner
+        })(3)</script>
+
+</html>
