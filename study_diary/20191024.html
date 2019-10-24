@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>20191024</title>
+    <link rel="shortcut icon" href="./assets/images/icon2.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/notosanstc.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/solarized-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="https://veraaaaaaa.github.io/study_diary/" target="_blank">
+            <img src="./assets/images/logo_vera.png" alt="" class="logo">
+        </a>
+        <div class="icon_group">
+            <a href="https://github.com/veraaaaaaa/" target="_blank"><img src="./assets/images/git.png" alt=""></a>
+            <a href="https://medium.com/@veraaaaaliu" target="_blank"><img src="./assets/images/medium.png" alt=""></a>
+            <a href=""><img src="./assets/images/ig.png" alt="" target="_blank"></a>
+            <a href=""><img src="./assets/images/twitter.jpg" alt="" target="_blank"></a>
+            <a href=""><img src="./assets/images/linkedin.png" alt="" target="_blank"></a>
+        </div>
+    </header>
+    <section class="study_section1">
+        <h1>firebase 的使用指南 ( 2019 / 10 / 24 )</h1>
+        <br>
+        <img src="./assets/images/study_diary/20191024/firebase_logo.png" alt="">
+        <br> <br>
+        <p>終於有機會來使用 firebase，今天會從專案的建立開始進行。</p>
+        <p>Let's get started!</p>
+        <br>
+        <hr>
+        <br>
+        <p>STEP1 : 建立專案</p>
+        <img src="./assets/images/study_diary/20191024/firebase1.png" alt="">
+        <br><br>
+        <p>STEP2 : 輸入專案名稱</p>
+        <img src="./assets/images/study_diary/20191024/firebase2.png" alt="">
+        <br><br>
+        <p>STEP3 : 選擇 WEB</p>
+        <img src="./assets/images/study_diary/20191024/firebase5.png" alt="">
+        <br><br>
+        <p>STEP4 : 取一個應用程式暱稱（ 只有自己或團隊知道 ）</p>
+        <img src="./assets/images/study_diary/20191024/firebase6.png" alt="">
+        <br><br>
+        <p>STEP5 : 獲取一組 SDK</p>
+        <img src="./assets/images/study_diary/20191024/firebase7.png" alt="">
+        <br>
+        <br>
+        <p>STEP6 : 在網頁中引入需要的 js 檔</p>
+        <pre><code>&lt;script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js">&lt;/script>
+&lt;script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js">&lt;/script> 
+</code></pre> <br>
+        <p>STEP7 : 在 body 的後面加入那串 sdk </p>
+        <pre><code>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "",
+          authDomain: "XXXXXXXXXXXXXXXX.firebaseapp.com",
+          databaseURL: "https://XXXXXXXXXXXXXXXX.firebaseio.com",
+          projectId: "XXXXXXXXXXXXXXXX",
+          storageBucket: "XXXXXXXXXXXXXXXX.appspot.com",
+          messagingSenderId: "",
+          appId: "",
+          measurementId: ""
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+              </code></pre>
+        <br>
+        <p>STEP8 : </p>
+        <pre><code>var db = firebase.firestore();
+var ref = db.collection('postcard');   // postcard 為你在 firebase 中創建集合的名字
+var isInitSoundRemind = true;
+var cardList = []
+var cardListIndex = new Date().getTime();
+
+//onload的時候先 get data
+$(document).ready(function () {
+    getdata(true);
+});
+
+//function getdata
+function getdata(isFirst) {
+var remainder = 0;
+if (cardList.length > 0) {
+    remainder = cardList.length % 3
+}
+var docRef = db.collection("postcard");
+docRef
+    .where("updatedAt", "<", cardListIndex)
+    .orderBy('updatedAt', 'desc')
+    .limit(3 - remainder) // 一次補滿一排 或新增一排 (3封)
+    .get()
+    .then(querySnapshot => {
+    if (!isFirst && querySnapshot.empty) {
+        //alert('已讀取完所有資料')
+        $('#read-button').hide();
+    } else {
+        querySnapshot.forEach(doc => {
+        var card = doc.data()
+        // console.log('query new data', card);
+        cardList.push(card)
+        cardListIndex = card.updatedAt
+        });
+        reloadCardList(cardList)
+    }
+    })
+}
+//當有新的資料進 firebase
+function storedata(src) {
+    if (src) {
+      var params = {
+        img: src,
+        // message: message,
+        // cardType: cardType,
+        updatedAt: new Date().getTime(), // firebase.firestore.FieldValue.serverTimestamp()
+      }
+      // 新增集合，目前隨機亂數
+      ref.add(params).then(() => {
+        // console.log('set data successful');
+        cardList = [params].concat(cardList)
+        reloadCardList(cardList)
+      });
+    }
+  }
+//資料也同步更新
+function reloadCardList(cardList) {
+var newDom = ''
+cardList.forEach((value, index) => {
+    if (index % 3 === 0) {
+    newDom += `&lt;div class="card-row">
+    &lt;div class="line">&lt;/div>`
+    }
+    newDom += `&lt;div class="card-wrapper">
+    &lt;div class="background type-${value.cardType}">&lt;/div>
+    &lt;img src="${value.img}">&lt;/img>
+    &lt;div class="peg">
+    &lt;img src="./theme/images/letter/peg.png" alt="">
+    &lt;/div>
+    &lt;/div>`
+    // card popup
+    // newDom += `&lt;div id="card-detail-${index + 1}" class="modal card-detail type-${value.cardType}">
+    //     &lt;div class="text">${value.message}&lt;/div>
+    //     &lt;div class="name">${value.name}&lt;/div>
+    //     &lt;a href="#" rel="modal:close" class="back-button">> BACK&lt;/a>
+    //   &lt;/div>`
+    if (index % 3 === 2 || index === cardList.length - 1) {
+    newDom += `&lt;/div>`;
+    }
+})
+$('#card-list').html(newDom)
+}
+
+</code></pre>
+        <br><br>
+        <hr>
+        <br><br>
+        <br>
+        <h3>學習資源</h3>
+        <h5 style="font-weight: 200">
+        https://firebase.google.com/docs/reference/js/firebase.database.DataSnapshot
+        </h5>
+        <br><br>
+        <hr>
+        <br><br><br>
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://veraaaaaaa.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+    </section>
+
+    <footer>
+        <p>
+            建議使用 Chrome、Firefox、Safari 瀏覽 <br>
+            Copyright © 2019 VERA. All rights reserved. 版權所有，禁止擅自轉貼節錄
+        </p>
+    </footer>
+</body>
+<script>hljs.initHighlightingOnLoad();
+
+
+    // outer func
+    var addTo = function (passed) {
+        // inner func
+        var add = function (inner) { return passed + inner }
+        return add
+    }
+    console.dir(addTo(3))
+
+    // 實際應用 (我們可以保存變數於函式內)
+    var addThree = addTo(3)
+    var addFive = addTo(5)
+
+    // 查看 [[Scopes]] Closure 可見 passed 保存了不同的值
+    console.dir(addFive)
+
+    console.log(addThree(3)) // 6
+    console.log(addFive(3)) // 8
+
+        // 上面的 addFive(3) 等同於
+        // IIFE 執行 內部 add Func 並回傳其值
+        // (因addTo回傳function，而addTo()會執行該Func)
+        (function add(inner) {
+            return 5 + inner
+        })(3)</script>
+
+</html>
