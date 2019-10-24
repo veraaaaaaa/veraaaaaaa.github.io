@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  <link rel="stylesheet" href="./assets/css/web.css">
+  <link rel="stylesheet" href="./assets/css/animate.min.css">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-firestore.js"></script>
+  <meta name="description" content="從病人自主權利法開始預立最好的告別">
+  <meta property="og:title" content="為愛而立" />
+  <meta property="og:type" content="eventPage" />
+  <meta property="og:url" content="https://topic.cw.com.tw/test/vera/20191024/" />
+  <!-- 請替換成自己 server 的 網頁 share 圖絕對路徑 -->
+  <!-- <meta property="og:image" content="https://rensky.github.io/sick_health/theme/images/share.png" /> -->
+  <meta property="og:description" content="從病人自主權利法開始預立最好的告別" />
+  <link rel="shortcut icon" href="./theme/images/favicon.ico" />
+  <link rel="bookmark" href="./theme/images/favicon.ico" />
+
+  <title>為愛而立</title>
+</head>
+<script>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({
+      'gtm.start': new Date().getTime(),
+      event: 'gtm.js'
+    });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src =
+      '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', 'GTM-MCMN77');
+</script>
+<!-- End Google Tag Manager -->
+<script type='text/javascript'>
+  var _sf_async_config = {};
+  /** CONFIGURATION START **/
+  _sf_async_config.uid = 64865;
+  _sf_async_config.domain = 'topic.commonhealth.com.tw';
+  _sf_async_config.useCanonical = true;
+  _sf_async_config.sections = '廣告專輯'; //CHANGE THIS
+  _sf_async_config.authors = '2019 mohw'; //CHANGE THIS
+  /** CONFIGURATION END **/
+  (function () {
+    function loadChartbeat() {
+      window._sf_endpt = (new Date()).getTime();
+      var e = document.createElement('script');
+      e.setAttribute('language', 'javascript');
+      e.setAttribute('type', 'text/javascript');
+      e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+      document.body.appendChild(e);
+    }
+    var oldonload = window.onload;
+    window.onload = (typeof window.onload != 'function') ?
+      loadChartbeat : function () {
+        oldonload();
+        loadChartbeat();
+      };
+  })();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119531863-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-119531863-1');
+</script>
+<script>
+  ! function (f, b, e, v, n, t, s) {
+    if (f.fbq) return;
+    n = f.fbq = function () {
+      n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+    };
+    if (!f._fbq) f._fbq = n;
+    n.push = n;
+    n.loaded = !0;
+    n.version = '2.0';
+    n.queue = [];
+    t = b.createElement(e);
+    t.async = !0;
+    t.src = v;
+    s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s)
+  }(window, document, 'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '153319238642910');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=153319238642910&ev=PageView&noscript=1" /></noscript>
+<!-- End Facebook Pixel Code -->
+
+<body>
+  <header>
+    <div class="clearfix">
+      <div class="logo">
+        <a href="./index.html">
+          <img src="./theme/images/logo.png" alt="">
+        </a>
+      </div>
+      <nav>
+        <ul class="desktop-menu">
+          <li class="active"><a class="js-link-2" href="./letter.html"><span>練習用</span></a></li>
+        </ul>
+      </nav>
+      <div class="menuopen">
+        <div>
+          <span class="mline1"></span>
+          <span class="mline2"></span>
+          <span class="mline3"></span>
+          <span class="mline4"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <audio id="music" src="./theme/sounds/letter-music.mp3" type="audio/mpeg" loop>
+  </audio>
+  <!----------------popup: card create-------------------->
+  <div id="card-create" class="modal">
+    <div class="name-wrapper">
+      <div class="label">請問要怎麼稱呼您<span class="error-message">＊請填寫</span></div>
+      <input id="letterName" class="name" type='text' placeholder="請輸入您的暱稱，最多8個字" maxlength="8" />
+      <div class="input-path"></div>
+    </div>
+    <div class="text-wrapper">
+      <div class="label-group">
+        <div class="text label">寫下你最美的告別<span class="error-message">＊請填寫</span></div>
+        <div class="word-count">
+          <div id="letterTextCount" class="amount">0</div>
+          /100
+        </div>
+      </div>
+      <textarea id="letterTextArea" onkeyup="letterCheck();" class="text"
+        placeholder="練習送給自己與摯愛，一封最美的告別信（字數限制100個字）"></textarea>
+    </div>
+    <div class="type label">選擇信紙的樣式</div>
+    <div id="letterCardtype" class="type-choose-group">
+      <div class="type-choose type-1 active" data-num="./assets/images/postcard.jpg"></div>
+      <div class="type-choose type-2" data-num="./assets/images/postcard_2.jpg"></div>
+      <div class="type-choose type-3" data-num="type-3"></div>
+    </div>
+    <!-- <div class="captcha-wrapper">
+      <div id="rcaptcha" class="g-recaptcha captcha" data-sitekey="6LeDhq8UAAAAAH3PT6l6Lwv3mQMRhBs7URit8_L9"></div>
+      <span class="error-message">＊請進行驗證</span>
+    </div> -->
+    <div id="letterSendButton" class="send-button"></div>
+  </div>
+
+  <!----------------popup: card done-------------------->
+  <!--分享按鈕＆截圖呈現-->
+  <div id="card-done" class="modal">
+    <div class="content">
+       <div class="postcard_print"></div>
+       <div class="postcard_print_f" style="opacity: 1;">
+        <div></div>
+      </div>
+      <div id="fb-root"></div>
+      <div class="fb-share-button" 
+      data-href="./20191022.html" 
+      data-layout="button_count">
+    </div>
+    <!-- <a class="fb-share" href="javascript:void(window.open('http://www.facebook.com/sharer/sharer.php?u='.concat(encodeURIComponent( 'http://' + window.location.hostname + '/page_name.html')) ));" target="_blank">分享至 Facebook</a> -->
+      <!-- <li class="facebook"><a class="facebook" href="javascript:window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');"><i class="fab fa-facebook-f"></i></a><span class="share-text">このページをシェアする</span></li> -->
+      <!-- <div class="btn-group">
+        <div id="share-button" class="btn-share">
+          <img class="desktop" src="./assets/images/icon2.png" alt="">
+          <img class="mobile" src="./theme/images/letter/mobile/btn-share-m.png" alt="">
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+  <!----------------popup: sound remind-------------------->
+  <!-- <div id="sound-remind" class="modal">
+    <div class="content">
+      <div class="sound-image"></div>
+      <div class="text">請點擊右上角開啟音樂播放，一同了解關於預約的美好告別。</div>
+    </div>
+  </div> -->
+
+  <!----------------letter page start-------------------->
+  <div class="wrapper letter-wrapper">
+
+    <img class="down-button animated fadeOutDown infinite" src="./theme/images/letter/mobile/down.png" alt="">
+
+    <div class="sound-button"></div>
+
+    <div class="topic-wrapper">
+      <div class="topic-bg">
+        <img class="desktop" src="./theme/images/letter/bg-kv.png" alt="">
+        <img class="mobile" src="./theme/images/letter/mobile/bg-kv-m.png" alt="">
+      </div>
+      <div class="title">
+        <!-- <img class="desktop" src="./theme/images/letter/mail/letter-bg.png" alt="預約的美好告別">
+        <img class="mobile" src="./theme/images/letter/mobile/mail/letter-bg-m.png" alt="預約的美好告別-m"> -->
+        <!-- <script>
+          $.each([1, 2, 3, 4, 5, 6, 7], function (index, value) {
+            document.write(`
+				      <img class="desktop title-text animated fadeIn delay-${value}"
+                src="./theme/images/letter/mail/letter-text-${value}.png" 
+                alt="預約的美好告別-文字${value}">
+				      <img class="mobile title-text animated fadeIn delay-${value}"
+                src="./theme/images/letter/mobile/mail/letter-text-${value}-m.png" 
+                alt="預約的美好告別-文字${value}-m">
+            `);
+          });
+        </script> -->
+      </div>
+      <div class="people">
+        <img src="./theme/images/letter/kv-2.png" alt="">
+      </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="title">
+        <!-- <img src="./theme/images/letter/title-letter.png" alt="最美的告別信"> -->
+      </div>
+      <p class="dsc">
+        到了人生的最後階段，我們想要對自己最愛的人說些什麼?<br>
+        因為愛自己，我們拾回生命自主權；<br>
+        因為愛家人，我們學習拋開禁忌，決定自己的人生難題。<br>
+        預約，再見。送給自己與摯愛，一封最美的告別信。<br>
+      </p>
+      <div class="example-group">
+
+      </div>
+      <img id="write-button" class="write-button" src="./assets/images/btn-write.png" alt="">
+    </div>
+    <div class="card-list-wrapper">
+      <div id="card-list" class="card-list">
+      </div>
+      <div class="read-button-wrapper">
+        <img id="read-button" class="read-button" src="./theme/images/letter/btn-seemore.png" alt="">
+      </div>
+      <div class="footer-phone">
+        <a href="tel:0800-008-545">
+          <img src="./theme/images/letter/footer.png" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+  <!----------------letter page end-------------------->
+
+  <footer class="ft">
+    <div id="commonhealth_footer">
+      <div class="commonhealth_footer-copyright">
+        Copyright © 2019 vera. <br>All rights reserved. 版權所有，禁止擅自轉貼節錄
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <!-- <script src="./theme/javascript/scrollreveal.min.js"></script> -->
+  <script src="./assets/js/html2canvas.min.js"></script>
+
+  <script>
+    var isInitSoundRemind = true;
+    var cardList = []
+    var cardListIndex = new Date().getTime();
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyC-T0xdYno5zoxT7gRoSKWCiSLaYAjgCX4",
+      authDomain: "fir-20191022.firebaseapp.com",
+      databaseURL: "https://fir-20191022.firebaseio.com",
+      projectId: "fir-20191022",
+      // storageBucket: "fir-20191022.appspot.com",
+      messagingSenderId: "367944165973",
+      // appId: "1:367944165973:web:bcd98c8a5805f4a17202dc",
+      // measurementId: "G-W3CY6846V2"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var db = firebase.firestore();
+    var ref = db.collection('postcard'); // db 集合
+
+    function reloadCardList(cardList) {
+      var newDom = ''
+      cardList.forEach((value, index) => {
+        if (index % 3 === 0) {
+          newDom += `<div class="card-row">
+              <div class="line"></div>`
+        }
+        newDom += `<div class="card-wrapper">
+          <div class="background type-${value.cardType}"></div>
+          <img src="${value.img}"></img>
+          <div class="peg">
+            <img src="./theme/images/letter/peg.png" alt="">
+          </div>
+        </div>`
+        // card popup
+        // newDom += `<div id="card-detail-${index + 1}" class="modal card-detail type-${value.cardType}">
+        //     <div class="text">${value.message}</div>
+        //     <div class="name">${value.name}</div>
+        //     <a href="#" rel="modal:close" class="back-button">> BACK</a>
+        //   </div>`
+        if (index % 3 === 2 || index === cardList.length - 1) {
+          newDom += `</div>`;
+        }
+      })
+      $('#card-list').html(newDom)
+    }
+
+    function storedata(src) {
+      if (src) {
+        var params = {
+          img: src,
+          // message: message,
+          // cardType: cardType,
+          updatedAt: new Date().getTime(), // firebase.firestore.FieldValue.serverTimestamp()
+        }
+        // 新增集合，目前隨機亂數
+        ref.add(params).then(() => {
+          // console.log('set data successful');
+          cardList = [params].concat(cardList)
+          reloadCardList(cardList)
+        });
+      }
+    }
+
+    function getdata(isFirst) {
+      var remainder = 0;
+      if (cardList.length > 0) {
+        remainder = cardList.length % 3
+      }
+      var docRef = db.collection("postcard");
+      docRef
+        .where("updatedAt", "<", cardListIndex)
+        .orderBy('updatedAt', 'desc')
+        .limit(3 - remainder) // 一次補滿一排 或新增一排 (3封)
+        .get()
+        .then(querySnapshot => {
+          if (!isFirst && querySnapshot.empty) {
+            //alert('已讀取完所有資料')
+            $('#read-button').hide();
+          } else {
+            querySnapshot.forEach(doc => {
+              var card = doc.data()
+              // console.log('query new data', card);
+              cardList.push(card)
+              cardListIndex = card.updatedAt
+            });
+            reloadCardList(cardList)
+          }
+        })
+    }
+
+    function letterCheck() {
+      var curLength = $("#letterTextArea").val().length;
+      if (curLength > 100) {
+        var num = $("#letterTextArea").val().substr(0, 100);
+        $("#letterTextArea").val(num);
+        // alert("超過字數限制");
+      }
+      $("#letterTextCount").text($("#letterTextArea").val().length);
+    }
+
+    function removeError() {
+      if ($(".name-wrapper").hasClass('is-error')) {
+        $(".name-wrapper").removeClass('is-error');
+      }
+      if ($(".text-wrapper").hasClass('is-error')) {
+        $(".text-wrapper").removeClass('is-error');
+      }
+      if ($(".captcha-wrapper").hasClass('is-error')) {
+        $(".captcha-wrapper").removeClass('is-error');
+      }
+    }
+
+    $(document).ready(function () {
+
+      getdata(true);
+
+      // if (isInitSoundRemind) {
+      //   isInitSoundRemind = false;
+      //   $('#sound-remind').modal();
+      // }
+
+      $(window).scroll(function () {
+        var height = $(window).height();
+        if ($(window).scrollTop() > height / 2) {
+          $('.down-button').hide()
+        } else {
+          $('.down-button').show()
+        }
+      });
+
+      // $('#sound-remind').click(function () {
+      //   $.modal.close();
+      // });
+
+      $('#more-button').click(function () {
+        window.open('http://bit.ly/2JJkonc')
+      });
+
+      $('#share-button').click(function () {
+        var title = '從病人自主權利法開始，預立最好的告別! %0D%0A死亡是每個人都不可逃避的事情，讓病人得到善終，讓家人得到善生，讓彼此的關係得到善別，「 預立醫療決定」是一個責任， 也是一份禮物， 給自己、 家人，用愛做最好的告別。';
+        var url = "http://" + location.hostname + location.pathname;
+        var href
+        // 行動裝置語法
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+          href = "http://line.naver.jp/R/msg/text/?" + title + "%0D%0A" + url;
+        } else {
+          // 網頁版語法
+          href = "https://lineit.line.me/share/ui?url=" + encodeURIComponent(url);
+        }
+        window.open(href)
+      });
+
+      $('.menuopen').click(function () {
+        var MENUopen = $('.menuopen > div')
+        if (MENUopen.hasClass('clickopen')) {
+          MENUopen.removeClass('clickopen');
+          $('nav').removeClass('show');
+        } else {
+          MENUopen.addClass('clickopen');
+          $('nav').addClass('show');
+        }
+      });
+
+      $('nav li').click(function () {
+        $('nav').removeClass('show');
+        $('.menuopen > div').removeClass('clickopen');
+      });
+
+
+      $('.sound-button').click(function () {
+        var soundButton = $('.sound-button')
+        if (soundButton.hasClass('active')) {
+          soundButton.removeClass('active');
+          $('#music')[0].pause();
+          $('#music')[0].currentTime = 0;
+        } else {
+          soundButton.addClass('active');
+          $('#music')[0].play();
+        }
+      });
+
+      $('.type-choose').click(function () {
+        $('.type-choose-group > .type-choose').each(function () {
+          if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+          }
+        });
+        $(this).addClass('active');
+      });
+
+      $('#read-button').click(function () {
+        getdata(false);
+      });
+
+      $('#write-button').click(function () {
+        var postcard_print = document.querySelector(".postcard_print")
+        $(".postcard_print").html("");
+        removeError();
+        // ga('send', 'event', 'letter', 'click', 'write');
+        $("#letterName").val('');
+        $("#letterTextArea").val('');
+        $("#letterTextCount").text(0);
+        // grecaptcha.reset();
+        $('#card-create').modal();
+      });
+
+      $("#letterSendButton").click(function () {
+
+        removeError();
+
+        //print/canvas
+        var postcard_print = document.querySelector(".postcard_print")
+        var name = document.querySelector("#letterName").value
+        var content = document.querySelector("#letterTextArea").value
+        var d1 = document.createElement("h3");
+        var d2 = document.createElement("p");
+        var img = document.createElement("img");
+        d1.innerHTML = name
+        postcard_print.appendChild(d1);
+        postcard_print.appendChild(d2);
+        postcard_print.appendChild(img);
+        var type_choose = document.querySelectorAll('.type-choose')
+        for (var i = 0; i < type_choose.length; i++) {
+          if (type_choose[i].className.indexOf('active') !== -1) {
+            var get_num = type_choose[i].getAttribute('data-num')
+            //console.log(get_num)
+            //alert(get_num)
+            img.src = get_num
+            img.style.width = '100%'
+            d1.style.position = 'absolute'
+            d1.style.top = '50%'
+            d1.style.left = '10%'
+          }
+        }
+        var message = $("#letterTextArea").val()
+        var cardType = 0
+        $('#letterCardtype > .type-choose.active').each(function () {
+          cardType = $(".type-choose").index(this) + 1
+        });
+        // var captchaResponse = grecaptcha.getResponse();
+        if (name.trim() === '') {
+          // alert('暱稱不能為空')
+          $(".name-wrapper").addClass('is-error');
+        } else if (message.trim() === '') {
+          // alert('內容不能為空')
+          $(".text-wrapper").addClass('is-error');
+        }
+        // else if (captchaResponse.length == 0) {
+        //   // alert('驗證錯誤')
+        //   $(".captcha-wrapper").addClass('is-error');
+        // }
+        else {
+          var canvasIn = document.querySelector('.postcard_print_f');
+          var postcard = document.querySelector('.postcard_print');
+          html2canvas(postcard, { allowTaint: false }
+          ).then(function (canvas) {
+            // canvas.setAttribute('width','420')
+            // canvas.setAttribute('height','302')
+            canvasIn.appendChild(canvas);
+            var $div = $(".postcard_print_f div");
+            $div.empty();
+            $("<img />", { src: canvas.toDataURL("image/png") }).appendTo($div);
+            $('.postcard_print').css('display', 'none');
+            var src = $('.postcard_print_f div img').attr('src')
+            storedata(src);
+            fbShare(src);
+          });
+  
+          $("#letterName").val('');
+          $("#letterTextArea").val('');
+          $("#letterTextCount").text(0);
+          //storedata(name, message, cardType);
+          // ga('send', 'event', 'letter', 'click', 'send');
+          $('#card-done').modal();
+          // $.modal.close();
+        }
+      });
+    function fbShare(src){
+      var meta = document.createElement('meta')
+      meta.setAttribute('property','og:description')
+      meta.setAttribute('content',src)
+      var head = document.querySelector('head');
+      head.appendChild(meta)
+      // $('#share-button .desktop').click(function(){
+        
+      // })
+    }
+
+
+    });
+  </script>
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</body>
+
+</html>

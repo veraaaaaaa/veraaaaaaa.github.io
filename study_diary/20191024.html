@@ -74,7 +74,7 @@
         firebase.analytics();
               </code></pre>
         <br>
-        <p>STEP8 : </p>
+        <p>STEP8 : 可以開始玩文件，我先用之前的東西去改，目前只會用寫入跟讀取兩個功能</p>
         <pre><code>var db = firebase.firestore();
 var ref = db.collection('postcard');   // postcard 為你在 firebase 中創建集合的名字
 var isInitSoundRemind = true;
@@ -157,7 +157,6 @@ cardList.forEach((value, index) => {
 })
 $('#card-list').html(newDom)
 }
-
 </code></pre>
         <br><br>
         <hr>
