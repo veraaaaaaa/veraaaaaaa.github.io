@@ -1,0 +1,593 @@
+$pc_m:1367px;
+$pc_s:1025px;
+$ipad:769px;
+$mb_l:640px;
+$mb_m:415px;
+$mb_s:376px;
+$mb_5s:321px;
+@mixin pc_m-width() {
+    @media all and (max-width: $pc_m) {
+        @content;
+    }
+}
+@mixin pc_s-width() {
+    @media all and (max-width: $pc_s) {
+        @content;
+    }
+}
+@mixin ipad-width() {
+    @media all and (max-width: $ipad) {
+        @content;
+    }
+}
+@mixin mb_l-width() {
+    @media all and (max-width: $mb_l) {
+        @content;
+    }
+}
+@mixin mb_m-width() {
+    @media all and (max-width: $mb_m) {
+        @content;
+    }
+}
+@mixin mb_s-width() {
+    @media all and (max-width: $mb_s) {
+        @content;
+    }
+}
+@mixin mb_5s-width() {
+    @media all and (max-width: $mb_5s) {
+        @content;
+    }
+}
+// 寬度設定
+@mixin cont_content($cont_width:1100px) {
+    width: $cont_width;
+    max-width: 100%;
+    margin: auto;
+    padding: 40px 0;
+    position: relative;
+}
+// flex設定
+%flexBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+// 標題樣式
+$tt_color:#0356b4;
+$tt_size:45px;
+@mixin ttStyle() {
+    color: $tt_color;
+    font-size: $tt_size;
+}
+// 文章內文樣式
+$atc_color:#3e4142;
+$atc_size:18px;
+@mixin atcStyle() {
+    color: $atc_color;
+    font-size: $atc_size;
+}
+
+.kvBox{
+    @extend %flexBox;
+    background: url(../images/kv1920.jpg) center no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    @include ipad-width(){
+        background: url(../images/kv414.jpg) center no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    @include mb_m-width(){
+        background: url(../images/kv414.jpg) center no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    .kv{
+        width: 800px;
+        height: 992px;
+        position: relative;
+        @include pc_m-width(){
+            height: 800px;
+        }
+        @include ipad-width(){
+            width: 100%;
+        }
+        @include mb_m-width(){
+            height: 100vh;
+        }
+        .title{
+            width: 70%;
+            height: 280px;
+            background: url(../images/kv_tt.gif) center no-repeat;
+            background-size: cover;
+            z-index: 2;
+            position: absolute;
+            top: 330px;
+            right: initial;
+            bottom: initial;
+            left: 110px;
+            @include pc_m-width(){
+                top: 240px;
+                left: 50px;
+            }
+            @include pc_s-width(){
+                top: 290px;
+                right: initial;
+                bottom: initial;
+                left: 0px;
+            }
+            @include ipad-width(){
+                top: 270px;
+                left: 15%;
+                height: 270px;
+            }
+            @include mb_l-width(){
+                top: 270px;
+                left: 89px;
+                height: 224px;
+                width: 69%;
+            }
+            @include mb_m-width(){
+                width: 80%;
+                height: 166px;
+                left: 42px;
+            }
+            @include mb_s-width(){
+                height: 150px;
+                top: 210px;
+            }
+            @include mb_5s-width(){
+                height: 129px;
+                top: 200px;
+            }
+            .tt_pic{
+                position: absolute;
+                img{width: 100%;}
+                &.tt_pic1{
+                    width: 60px;
+                    height: auto;
+                    top: 40%;
+                    right: initial;
+                    bottom: initial;
+                    left: 3%;
+                    @include mb_m-width(){
+                        width: 37px;
+                        height: auto;
+                        top: 37%;
+                        right: initial;
+                        bottom: initial;
+                        left: 2%;
+                    }
+                    @include mb_s-width(){
+                        width: 33px;
+                        height: auto;
+                        top: 38%;
+                        right: initial;
+                        bottom: initial;
+                        left: 2%;
+                    }
+                }
+                &.tt_pic2{
+                    width: 50px;
+                    height: auto;
+                    top: 33%;
+                    right: initial;
+                    bottom: initial;
+                    left: 37%;
+                    @include mb_m-width(){
+                        width: 30px;
+                    }
+                }
+                &.tt_pic3{
+                    width: 50px;
+                    height: auto;
+                    top: 33%;
+                    right: initial;
+                    bottom: initial;
+                    left: 74%;
+                    @include mb_m-width(){
+                        width: 30px;
+                    }
+                }
+                &.tt_pic4{
+                    width: 50px;
+                    height: auto;
+                    top: 33%;
+                    right: 0%;
+                    bottom: initial;
+                    left: initial;
+                    @include mb_m-width(){
+                        width: 30px;
+                    }
+                }
+            }
+        }
+        .circle{
+            position: absolute;
+            top: 210px;
+            right: -10px;
+            bottom: initial;
+            left: initial;
+            width: 70%;
+            height: auto;
+            @include pc_m-width(){
+                top: 120px;
+                right: -10px;
+            }
+            @include pc_s-width(){
+                top: 120px;
+                right: 0px;
+            }
+            @include ipad-width(){
+                width: 93%;
+                top: 75px;
+                right: 28px;
+            }
+            @include mb_l-width(){
+                top: 90px;
+            }
+            @include mb_m-width(){
+                top: 160px;
+                left: 0;
+                width: 100%;
+            }
+            @include mb_s-width(){
+                top: 110px;
+            }
+            @include mb_5s-width(){
+                top: 111px;
+            }
+            .cc_pic{
+                width: 100%;
+                height: auto;
+                position: absolute;
+                top: initial;
+                right: initial;
+                bottom: initial;
+                left: initial;
+                img{width: 100%;}
+            }
+        }
+    }
+}
+
+// infoBox
+.infoBox{
+    background: url(../images/info_bg.jpg) center repeat;
+    background-size: contain;
+    .content{
+        @include cont_content();
+        @extend %flexBox;
+        flex-wrap: nowrap;
+        padding: 40px 10px;
+        @include mb_l-width(){
+            flex-wrap: wrap;
+            justify-content: left;
+        }
+        .info_title{
+            width: 20%;
+            height: auto;
+            img{ width: 100%;}
+            @include mb_l-width(){
+                width: 40%;
+                padding-left: 30px;
+            }
+            @include mb_m-width(){
+                width: 60%;
+            }
+        }
+        .info_words{
+            width: 80%;
+            color: #0356b4;
+            font-size: 18px;
+            padding: 30px;
+            @include mb_l-width(){
+                width: 100%;
+            }
+            p{
+                line-height: 2rem;
+                padding-bottom: 15px;
+                text-align: justify;
+            }
+        }
+    }
+}
+
+// atcBox1
+.atcBox{
+    width: 100%;
+    height: auto;
+    background: url(../images/atc1_bg.jpg) center no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    .title{
+        text-align: center;
+        padding: 80px 0 20px 0;
+        img{
+            width: 50px;
+            height: auto;
+        }
+        h2{
+            @include ttStyle();
+            @include mb_l-width(){
+                font-size: 35px;
+            }
+        }
+    }
+    .content{
+        @include cont_content();
+        @extend %flexBox;
+        .atc{
+            width: 33.33333%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+            padding: 10px;
+            @include mb_l-width(){
+                width: 86%;
+                padding-bottom: 30px;
+            }
+            &:hover .more{
+                letter-spacing: 2px;
+            }
+            &:hover .pic img{
+                transform: scale(1.1);
+            }
+            .pic{
+                border-radius:10px;
+                @extend %flexBox;
+                overflow: hidden;
+            }
+            .words{
+                padding: 20px 0;
+                h3{
+                    font-size: 24px;
+                    color: $tt_color;
+                    transition: 0.4s;
+                }
+                p{
+                    @include atcStyle();
+                    padding: 10px 0;
+                }
+                .more{
+                    background-color: $tt_color;
+                    display: inline-block;
+                    padding: 6px 16px;
+                    color: #fff;
+                    transition: 0.4s;
+                }
+            }
+            a{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+            }
+        }
+    }
+}
+
+// atcBox2
+.atcBox2{
+    background: url(../images/atc2_bg.png) bottom right no-repeat;
+    background-size: auto;
+    background-color: #fff;
+    position: relative;
+    .content{
+        .atc{
+            width: 30%;
+            margin: 10px 0;
+            padding: 10px;
+            @include mb_l-width(){
+                width: 86%;
+                padding-bottom: 30px;
+            }
+            .pic{
+                height: 360px;
+                img{
+                    width: auto;
+                    height: 100%;
+                }
+            }
+            .words{
+                background: #fff;
+                width: 90%;
+                margin-top: -50px;
+                margin-left: 39px;
+                position: relative;
+                z-index: 2;
+                padding: 20px;
+                h3{
+                    font-size: 21px;
+                    @media screen and (min-width:768px){
+                        height: 93px;
+                    }
+                }
+                p{
+                    line-height: 2rem;
+                    letter-spacing: 1px;
+                    padding: 10px 0;
+                    font-size: 16px;
+                    color: #5e5e5e;
+                    &.more{
+                        color: #0356b4;
+                        padding: 0;
+                        background: none;
+                        border-bottom: 1px #0356b4 solid;
+                    }
+                }
+            }
+        }
+        .atc2_icon1{
+            width: 120px;
+            height: auto;
+            position: absolute;
+            top: initial;
+            right: -100px;
+            left: initial;
+            bottom: 0;
+            @include mb_l-width(){
+                width: 80px;
+                height: auto;
+                position: absolute;
+                top: -210px;
+                right: 26px;
+                left: initial;
+                bottom: initial;
+            }
+        }
+        .atc2_icon2{
+            width: 140px;
+            height: auto;
+            position: absolute;
+            top: initial;
+            right: initial;
+            left: -100px;
+            bottom: 0;
+            @include mb_l-width(){
+                width: 67px;
+                height: auto;
+                position: absolute;
+                top: initial;
+                right: initial;
+                left: 7px;
+                bottom: 35%;
+            }
+        }
+    }
+}
+// atcBox3
+.atcBox3{
+    background: #e5f5fc;
+    overflow: hidden;
+    .content{
+        justify-content: center;
+        .atc{
+            padding: 20px;
+            margin: 20px 0;
+            @include mb_l-width(){
+                padding: 0px;
+            }
+        }
+        .atc3_icon1{
+            width: 380px;
+            height: auto;
+            position: absolute;
+            top: -100px;
+            right: -80px;
+            left: initial;
+            bottom: initial;
+            @include mb_m-width(){
+                width: 289px;
+                height: auto;
+                position: absolute;
+                top: -20px;
+                right: -30px;
+                left: initial;
+                bottom: initial;
+            }
+        }
+        .atc3_icon2{
+            width: 160px;
+            height: auto;
+            position: absolute;
+            top: initial;
+            right: initial;
+            left: 0px;
+            bottom: 100px;
+            @include mb_m-width(){
+                width: 120px;
+                height: auto;
+                position: absolute;
+                top: initial;
+                right: -78px;
+                left: initial;
+                bottom: 20px;
+            }
+        }
+    }
+}
+// atcBox4
+.atcBox4{
+    background: url(../images/atc4_bg.jpg) center no-repeat;
+    background-size: cover;
+    padding: 50px 0 100px 0;
+    .content{
+        .box{
+            @extend %flexBox;
+            width: 300px;
+            height: 176px;
+            position: relative;
+            transition: 0.4s;
+            margin: 10px;
+            padding: 10px;
+            &:hover{
+                margin-top: -10px;
+            }
+            &::before{
+                content: "";
+                width: 95%;
+                height: 90%;
+                position: absolute;
+                top: 50%;
+                right: initial;
+                left: 50%;
+                bottom: initial;
+                transform: translate(-50%,-50%);
+                border: 1px #fff solid;
+                z-index: 2;
+            }
+            &::after{
+                content: "";
+                background-color: rgba(0,140,161,0.8);
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                right: initial;
+                left: 0;
+                bottom: initial;
+                z-index: 1;
+            }
+            &.box1{
+                background: url(../images/atc4_pic1.jpg) center no-repeat ;
+                background-size: cover;
+            }
+            &.box2{
+                background: url(../images/atc4_pic1.jpg) center no-repeat ;
+                background-size: cover;
+            }
+            &.box3{
+                background: url(../images/atc4_pic1.jpg) center no-repeat ;
+                background-size: cover;
+            }
+            p{
+                text-align: center;
+                color: #fff;
+                font-size: 18px;
+                padding: 0 20px;
+                z-index: 3;
+            }
+            a{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 4;
+            }
+        }
+    }
+}
